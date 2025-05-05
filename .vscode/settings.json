@@ -4,5 +4,8 @@
   "editor.formatOnPaste": true,
   "files.associations": {
     "*.css": "tailwindcss"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

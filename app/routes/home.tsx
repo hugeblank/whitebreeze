@@ -1,46 +1,71 @@
-import { useTRPC } from "~/lib/trpc";
-import type { Route } from "./+types/home";
-import { useQuery } from "@tanstack/react-query";
 import { prefetch } from "~/lib/prefetch";
+import type { Route } from "./+types/home";
+import { useTRPC } from "~/lib/trpc";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import Throbber from "~/components/Throbber";
+import { Card } from "~/components/ui/card";
+import { Link } from "react-router";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "icon", href: "/favicon.svg" },
+  { rel: "icon", href: "/favicon.png" },
 ];
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Jebsite" },
-    { name: "description", content: "Welcome to my Jebsite!" },
+    { title: "WhiteBreeze" },
+    { name: "description", content: "Self-Hosted WhiteWind Blogspot" },
   ];
 }
 
 export const unstable_middleware: Route.unstable_MiddlewareFunction[] = [
   async ({ context }) => {
-    const { queryClient, trpc } = prefetch(context);
-
-    // Block the page to prefetch
-    await queryClient.prefetchQuery(trpc.hero.message.queryOptions());
-
-    // Or, if you don't want to block the page:
-    // void queryClient.prefetchQuery(trpc.hero.message.queryOptions());
-
-    // If you need to prevent internal navigations from causing prefetching, use skipIfSameOrigin
-    // await skipIfSameOrigin(request, async () => {
-    //   await queryClient.prefetchQuery(trpc.hero.message.queryOptions());
-    // });
+    const {
+      queryClient,
+      trpc: { listPosts },
+    } = prefetch(context);
+    await queryClient.prefetchInfiniteQuery(listPosts.infiniteQueryOptions({}));
   },
 ];
 
 export default function Home() {
   const trpc = useTRPC();
-  const message = useQuery(trpc.hero.message.queryOptions());
-
-  return (
-    <main className="container mx-auto flex flex-col items-center p-4 pt-16">
-      <h1 className="text-4xl">Jebsite</h1>
-      <p className="animate-shimmer bg-gradient-to-r from-gray-500 via-gray-300 to-gray-500 bg-[size:200%_100%] bg-clip-text text-sm text-transparent">
-        {message.data}
-      </p>
-    </main>
+  const listPosts = useInfiniteQuery(
+    trpc.listPosts.infiniteQueryOptions(
+      {},
+      {
+        getNextPageParam: (lastPage) => lastPage.cursor,
+      },
+    ),
   );
+
+  if (listPosts.isLoading) {
+    return <Throbber large />;
+  } else if (listPosts.isSuccess) {
+    return (
+      <div className="auto-cols grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4">
+        {listPosts.data.pages.flatMap((page) =>
+          page.records.map((record) => {
+            return (
+              <Card key={record.rkey} className="justify-between px-6">
+                <Link
+                  className="text-lg font-semibold text-blue-500 hover:text-blue-300"
+                  to={`/${record.rkey}`}
+                >
+                  {record.title}
+                </Link>
+                <p>{new Date(record.createdAt).toLocaleString()}</p>
+              </Card>
+            );
+          }),
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <h2 className="text-xl font-bold">Uhh...</h2>
+        <p>{listPosts.isError && listPosts.error.message}</p>
+      </>
+    );
+  }
 }
