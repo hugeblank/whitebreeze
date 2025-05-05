@@ -1,0 +1,12 @@
+.react-router
+build
+node_modules
+README.md
+docker-compose.yml
+.prettierrc
+components.json
+eslint.config.json
+.gitignore
+.vscode
+.husky
+.dockerignore
