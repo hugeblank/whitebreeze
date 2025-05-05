@@ -1,20 +1,24 @@
-FROM node:23-alpine AS base
-
-FROM base AS deps
+FROM node:23-alpine AS pnpm
+COPY ./package.json pnpm-lock.yaml /app/
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
+RUN corepack enable
+RUN corepack install
 
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN npm run build
+FROM pnpm AS development-dependencies-env
+COPY . /app/
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
-FROM base AS runner
+FROM pnpm AS production-dependencies-env
+RUN pnpm install --frozen-lockfile -P --ignore-scripts
+
+FROM pnpm AS build-env
+COPY . /app/
+COPY --from=development-dependencies-env /app/node_modules /app/node_modules
+RUN pnpm run build
+
+FROM pnpm
+COPY ./package.json pnpm-lock.yaml /app/
+COPY --from=production-dependencies-env /app/node_modules /app/node_modules
+COPY --from=build-env /app/build /app/build
 WORKDIR /app
-COPY --from=builder /app/build ./
-COPY --from=deps /app/node_modules ./node_modules
-ENV PORT=3000 
-EXPOSE 3000
-CMD ["node", "index.js"]
+CMD ["pnpm", "run", "start"]

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="200">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#3498db" />
+  
+  <!-- Left bracket < -->
+  <path d="M7 16l4 -4" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <path d="M7 16l4 4" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  
+  <!-- Letter J -->
+  <path d="M17 10v10c0 1-0.5 2-2 2h-1" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  
+  <!-- Right bracket > -->
+  <path d="M25 16l-4 -4" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <path d="M25 16l-4 4" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />
+</svg>
