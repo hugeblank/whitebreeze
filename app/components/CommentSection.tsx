@@ -4,6 +4,7 @@
 // - show even when there are 0 replies
 // - remove extraneous types
 // - use internal throbber component
+// - directly pass post url
 // https://emilyliu.me/blog/comments
 
 import { Link } from "react-router";
@@ -34,13 +35,15 @@ const fetchThreadData = async (
 };
 
 export const CommentSection = ({
-  uri,
+  did,
+  rkey,
   className,
 }: {
-  uri: string;
+  did: string;
+  rkey: string;
   className?: string;
 }) => {
-  const [, , did, , rkey] = uri.split("/");
+  const uri = `at://${did}/app.bsky.feed.post/${rkey}`;
   const postUrl = `https://bsky.app/profile/${did}/post/${rkey}`;
 
   const [thread, setThread] = useState<Thread | null>(null);
@@ -66,7 +69,6 @@ export const CommentSection = ({
   const showMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };
-  console.log("thread: ", thread.post);
 
   const sortedReplies = thread.replies
     .filter((reply) => AppBskyFeedDefs.isThreadViewPost(reply))

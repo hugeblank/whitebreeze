@@ -26,7 +26,7 @@ export default function Profile({
           <div className="m-2">
             {displayName && <h4>{displayName}</h4>}
             <h6 className="font-medium hover:text-blue-500 hover:underline">
-              <a href="https://bsky.app/profile/{handle}">
+              <a href={`https://bsky.app/profile/${handle}`}>
                 {handle ? `@${handle}` : did}
               </a>
             </h6>
