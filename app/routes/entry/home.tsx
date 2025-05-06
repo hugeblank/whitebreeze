@@ -15,14 +15,14 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png" },
 ];
 
-export function meta({ data: { title, handle }, location }: Route.MetaArgs) {
-  return makeMeta(location, title || "Untitled Blog Post", handle);
+export function meta({ data: { title, handle, url } }: Route.MetaArgs) {
+  return makeMeta(url, title || "Untitled Blog Post", handle);
 }
 
 const linkRegex =
   /^<link +rel="post" +href="(?:at:\/\/did:.+\/app\.bsky\.feed\.post\/|https?:\/\/bsky\.app\/profile\/.+\/post\/)(.*)\??.*"\/>/;
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ params, request }: Route.LoaderArgs) {
   try {
     const {
       value: { title, content },
@@ -34,6 +34,7 @@ export async function loader({ params }: Route.LoaderArgs) {
       content,
       did: diddoc.id,
       rkey: rkey && rkey[1],
+      url: request.url,
     };
   } catch (e) {
     console.error(e);

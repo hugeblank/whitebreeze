@@ -13,12 +13,15 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png" },
 ];
 
-export function meta({ location, data }: Route.MetaArgs) {
-  return makeMeta(location, data.TITLE, data.HANDLE);
+export function meta({ data }: Route.MetaArgs) {
+  return makeMeta(data.url, data.TITLE, data.HANDLE);
 }
 
-export function loader({}: Route.LoaderArgs) {
-  return env;
+export function loader({ request }: Route.LoaderArgs) {
+  return {
+    ...env,
+    url: request.url,
+  };
 }
 
 export const unstable_middleware: Route.unstable_MiddlewareFunction[] = [

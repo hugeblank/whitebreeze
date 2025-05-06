@@ -1,20 +1,17 @@
 import type { MetaDescriptors } from "react-router/route-module";
 
 export const makeMeta: (
-  location: Location,
+  url: string,
   title: string,
   handle: string,
-) => MetaDescriptors = (location, title, handle) => {
-  return [
+) => MetaDescriptors = (url, title, handle) => {
+  const host = url.match(/^(https?:\/\/.*\.).*$/);
+  const out = [
     { property: "og:site_name", content: "WhiteBreeze" },
     { name: "twitter:card", content: "summary" },
     {
       name: "twitter:description",
       content: `View the WhiteBreeze blog of @${handle}`,
-    },
-    {
-      name: "twitter:image",
-      content: `https://${location.host}/favicon.png`,
     },
     {
       name: "twitter:title",
@@ -24,4 +21,12 @@ export const makeMeta: (
       title: title,
     },
   ];
+  console.log(url);
+  if (host && host[1]) {
+    out.push({
+      name: "twitter:image",
+      content: `${host[1]}favicon.png`,
+    });
+  }
+  return out;
 };
