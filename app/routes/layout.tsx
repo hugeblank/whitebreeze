@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router";
 import type { Route } from "./+types/layout";
 import { diddoc, resolveProfile } from "~/lib/resolver.server";
 import Profile from "~/components/Profile";
-import { env } from "~/lib/env";
+import { env } from "~/lib/env.server";
 import { HomeIcon } from "lucide-react";
 
 export async function loader({}: Route.LoaderArgs) {

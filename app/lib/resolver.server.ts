@@ -13,7 +13,7 @@ import {
   WellKnownHandleResolver,
 } from "@atcute/identity-resolver";
 import { NodeDnsHandleResolver } from "@atcute/identity-resolver-node";
-import { env } from "./env";
+import { env } from "./env.server";
 import { BlueskyProfile } from "./types";
 
 // handle resolution

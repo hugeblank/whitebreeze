@@ -17,6 +17,9 @@ importers:
       '@atcute/identity-resolver-node':
         specifier: ^0.1.0
         version: 0.1.0(@atcute/identity-resolver@0.1.2(@atcute/identity@0.1.3))(@atcute/identity@0.1.3)
+      '@atproto/api':
+        specifier: ^0.15.6
+        version: 0.15.6
       '@atproto/syntax':
         specifier: ^0.4.0
         version: 0.4.0
@@ -41,6 +44,9 @@ importers:
       '@trpc/tanstack-react-query':
         specifier: 11.1.1
         version: 11.1.1(@tanstack/react-query@5.74.11(react@19.1.0))(@trpc/client@11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
+      bluesky-comments:
+        specifier: ^0.11.0
+        version: 0.11.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -192,8 +198,20 @@ packages:
   '@atcute/util-fetch@1.0.1':
     resolution: {integrity: sha512-Clc0E/5ufyGBVfYBUwWNlHONlZCoblSr4Ho50l1LhmRPGB1Wu/AQ9Sz+rsBg7fdaW/auve8ulmwhRhnX2cGRow==}
 
+  '@atproto/api@0.15.6':
+    resolution: {integrity: sha512-hKwrBf60LcI4BqArWyrhWJWIpjwAWUJpW3PVvNzUB1q2W/ByC0JAuwq/F8tZpCEiiVBzHjHVRx4QNA2TA1cG3g==}
+
+  '@atproto/common-web@0.4.2':
+    resolution: {integrity: sha512-vrXwGNoFGogodjQvJDxAeP3QbGtawgZute2ed1XdRO0wMixLk3qewtikZm06H259QDJVu6voKC5mubml+WgQUw==}
+
+  '@atproto/lexicon@0.4.11':
+    resolution: {integrity: sha512-btefdnvNz2Ao2I+qbmj0F06HC8IlrM/IBz6qOBS50r0S6uDf5tOO+Mv2tSVdimFkdzyDdLtBI1sV36ONxz2cOw==}
+
   '@atproto/syntax@0.4.0':
     resolution: {integrity: sha512-b9y5ceHS8YKOfP3mdKmwAx5yVj9294UN7FG2XzP6V5aKUdFazEYRnR9m5n5ZQFKa3GNvz7de9guZCJ/sUTcOAA==}
+
+  '@atproto/xrpc@0.7.0':
+    resolution: {integrity: sha512-SfhP9dGx2qclaScFDb58Jnrmim5nk4geZXCqg6sB0I/KZhZEkr9iIx1hLCp+sxkIfEsmEJjeWO4B0rjUIJW5cw==}
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -1113,6 +1131,9 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
+  await-lock@2.2.2:
+    resolution: {integrity: sha512-aDczADvlvTGajTDjcjpJMqRkOF6Qdz3YbPZm/PyW6tKPkx2hlYBzxMhEywM/tU72HrVZjgl5VCdRuMlA7pZ8Gw==}
+
   babel-dead-code-elimination@1.0.10:
     resolution: {integrity: sha512-DV5bdJZTzZ0zn0DC24v3jD7Mnidh6xhKa4GfKCbq3sfW8kaWhDdZjP3i81geA8T33tdYqWKw4D3fVv0CwEgKVA==}
 
@@ -1132,6 +1153,12 @@ packages:
   basic-auth@2.0.1:
     resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
     engines: {node: '>= 0.8'}
+
+  bluesky-comments@0.11.0:
+    resolution: {integrity: sha512-cLip57HT22fvXdnVfZwDrnuP7EyWIk8ziWnXca/0eBNX8QHgBWFipkof3Cp7Fs/OUFI5H9zN7180zbNYUHW5Hw==}
+    peerDependencies:
+      react: ^18.3.1
+      react-dom: ^18.3.1
 
   body-parser@1.20.3:
     resolution: {integrity: sha512-7rAxByjUMqQ3/bHJy7D6OGXvx/MMc4IqBn/X0fcM1QUcAItpZrBEYhWGem+tzXH90c+G01ypMcYJBO9Y30203g==}
@@ -1954,6 +1981,9 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
+  iso-datestring-validator@2.2.2:
+    resolution: {integrity: sha512-yLEMkBbLZTlVQqOnQ4FiMujR6T4DEcCb1xizmvXS+OxuhwcbtynoosRzdMA69zZCShCNAbi+gJ71FxZBBXx1SA==}
+
   iterator.prototype@1.1.5:
     resolution: {integrity: sha512-H0dkQoCa3b2VEeKQBOxFph+JAbcrQdE7KC0UkqwpLmv2EC4P41QXP+rqo9wYodACiG5/WM5s9oDApTU8utwj9g==}
     engines: {node: '>= 0.4'}
@@ -2342,6 +2372,9 @@ packages:
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+
+  multiformats@9.9.0:
+    resolution: {integrity: sha512-HoMUjhH9T8DDBNT+6xzkrd9ga/XiBI4xLr58LJACwK6G3HTOPeMz4nB4KJs33L2BelrIJa7P0VuNaVF3hMYfjg==}
 
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
@@ -2962,6 +2995,10 @@ packages:
     resolution: {integrity: sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==}
     engines: {node: '>=12.0.0'}
 
+  tlds@1.258.0:
+    resolution: {integrity: sha512-XGhStWuOlBA5D8QnyN2xtgB2cUOdJ3ztisne1DYVWMcVH29qh8eQIpRmP3HnuJLdgyzG0HpdGzRMu1lm/Oictw==}
+    hasBin: true
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -3033,6 +3070,9 @@ packages:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  uint8arrays@3.0.0:
+    resolution: {integrity: sha512-HRCx0q6O9Bfbp+HHSfQQKD7wU70+lydKVt4EghkdOvlK/NlrF90z+eXV34mUd48rNvVJXwkrMSPpCATkct8fJA==}
 
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
@@ -3273,7 +3313,38 @@ snapshots:
     dependencies:
       '@badrap/valita': 0.4.4
 
+  '@atproto/api@0.15.6':
+    dependencies:
+      '@atproto/common-web': 0.4.2
+      '@atproto/lexicon': 0.4.11
+      '@atproto/syntax': 0.4.0
+      '@atproto/xrpc': 0.7.0
+      await-lock: 2.2.2
+      multiformats: 9.9.0
+      tlds: 1.258.0
+      zod: 3.24.4
+
+  '@atproto/common-web@0.4.2':
+    dependencies:
+      graphemer: 1.4.0
+      multiformats: 9.9.0
+      uint8arrays: 3.0.0
+      zod: 3.24.4
+
+  '@atproto/lexicon@0.4.11':
+    dependencies:
+      '@atproto/common-web': 0.4.2
+      '@atproto/syntax': 0.4.0
+      iso-datestring-validator: 2.2.2
+      multiformats: 9.9.0
+      zod: 3.24.4
+
   '@atproto/syntax@0.4.0': {}
+
+  '@atproto/xrpc@0.7.0':
+    dependencies:
+      '@atproto/lexicon': 0.4.11
+      zod: 3.24.4
 
   '@babel/code-frame@7.26.2':
     dependencies:
@@ -4239,6 +4310,8 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
+  await-lock@2.2.2: {}
+
   babel-dead-code-elimination@1.0.10:
     dependencies:
       '@babel/core': 7.26.10
@@ -4266,6 +4339,12 @@ snapshots:
   basic-auth@2.0.1:
     dependencies:
       safe-buffer: 5.1.2
+
+  bluesky-comments@0.11.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      '@atproto/api': 0.15.6
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   body-parser@1.20.3:
     dependencies:
@@ -5298,6 +5377,8 @@ snapshots:
 
   isexe@2.0.0: {}
 
+  iso-datestring-validator@2.2.2: {}
+
   iterator.prototype@1.1.5:
     dependencies:
       define-data-property: 1.1.4
@@ -5872,6 +5953,8 @@ snapshots:
   ms@2.0.0: {}
 
   ms@2.1.3: {}
+
+  multiformats@9.9.0: {}
 
   nanoid@3.3.11: {}
 
@@ -6558,6 +6641,8 @@ snapshots:
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
 
+  tlds@1.258.0: {}
+
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
@@ -6633,6 +6718,10 @@ snapshots:
       - supports-color
 
   typescript@5.8.3: {}
+
+  uint8arrays@3.0.0:
+    dependencies:
+      multiformats: 9.9.0
 
   unbox-primitive@1.1.0:
     dependencies:

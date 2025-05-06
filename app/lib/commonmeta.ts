@@ -1,16 +1,16 @@
 import type { MetaDescriptors } from "react-router/route-module";
-import { env } from "./env";
 
 export const makeMeta: (
   location: Location,
   title: string,
-) => MetaDescriptors = (location, title) => {
+  handle: string,
+) => MetaDescriptors = (location, title, handle) => {
   return [
     { property: "og:site_name", content: "WhiteBreeze" },
     { name: "twitter:card", content: "summary" },
     {
       name: "twitter:description",
-      content: `View the WhiteBreeze blog of @${env.HANDLE}`,
+      content: `View the WhiteBreeze blog of @${handle}`,
     },
     {
       name: "twitter:image",

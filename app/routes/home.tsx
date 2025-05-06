@@ -7,14 +7,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { makeMeta } from "~/lib/commonmeta";
-import { env } from "~/lib/env";
+import { env } from "~/lib/env.server";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png" },
 ];
 
-export function meta({ location }: Route.MetaArgs) {
-  return makeMeta(location, env.TITLE);
+export function meta({ location, data }: Route.MetaArgs) {
+  return makeMeta(location, data.TITLE, data.HANDLE);
+}
+
+export function loader({}: Route.LoaderArgs) {
+  return env;
 }
 
 export const unstable_middleware: Route.unstable_MiddlewareFunction[] = [
