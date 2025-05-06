@@ -5,7 +5,7 @@ export const makeMeta: (
   title: string,
   handle: string,
 ) => MetaDescriptors = (url, title, handle) => {
-  const host = url.match(/^(https?:\/\/.*\.).*$/);
+  const host = url.match(/^(https?:\/\/.*\/).*$/);
   const out = [
     { property: "og:site_name", content: "WhiteBreeze" },
     { name: "twitter:card", content: "summary" },
