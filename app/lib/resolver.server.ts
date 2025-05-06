@@ -68,7 +68,6 @@ export async function resolveProfile(did: Did) {
         `https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${did}`,
       )
     ).json();
-    console.log(data);
     return await BlueskyProfile.parseAsync(data);
   } catch (e) {
     console.error(e);

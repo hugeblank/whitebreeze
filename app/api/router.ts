@@ -17,7 +17,7 @@ export const appRouter = router({
     )
     .output(
       z.object({
-        cursor: z.string(),
+        cursor: z.string().optional(),
         records: z.array(
           z.object({
             rkey: z.string(),

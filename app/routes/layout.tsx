@@ -3,6 +3,7 @@ import type { Route } from "./+types/layout";
 import { diddoc, resolveProfile } from "~/lib/resolver.server";
 import Profile from "~/components/Profile";
 import { env } from "~/lib/env";
+import { HomeIcon } from "lucide-react";
 
 export async function loader({}: Route.LoaderArgs) {
   return {
@@ -14,33 +15,29 @@ export async function loader({}: Route.LoaderArgs) {
 export default function Layout({
   loaderData: { profile, title },
 }: Route.ComponentProps) {
-  console.log(profile);
   return (
     <>
-      <header className="m-3">
-        <div className="flex w-full flex-row items-center justify-between gap-4">
+      <header className="container m-3 mx-auto">
+        <div className="my-2 flex flex-row">
           <Link className="align-center h-full w-fit" to="/">
-            <h1 className="block text-3xl font-semibold text-blue-500 hover:text-blue-300">
-              {title}
-            </h1>
-          </Link>
-          <Link to="/about" className="align-center">
-            <h1 className="block text-3xl font-semibold text-blue-500 hover:text-blue-300">
-              About
+            <h1 className="flex flex-row items-center text-3xl font-semibold text-blue-500 hover:text-blue-300">
+              <HomeIcon size={32} />
+              &nbsp;{title}
             </h1>
           </Link>
         </div>
+        {profile && <Profile {...profile} />}
       </header>
-      {profile && <Profile {...profile} />}
-      <div className="mt-8">
+      <main className="container mx-auto mt-8">
         <Outlet />
-      </div>
+      </main>
       <footer className="mt-8 text-center">
         Powered by &nbsp;
         <Link
           className="text-blue-500 hover:text-blue-300 hover:underline"
           to="https://github.com/hugeblank/whitebreeze"
         >
+          <img className="inline-block size-6" src="/favicon.png"></img>{" "}
           WhiteBreeze
         </Link>
       </footer>
