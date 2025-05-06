@@ -21,8 +21,8 @@ export const appRouter = router({
         records: z.array(
           z.object({
             rkey: z.string(),
-            title: z.string(),
-            createdAt: z.date({ coerce: false }),
+            title: z.string().optional(),
+            createdAt: z.date({ coerce: false }).optional(),
           }),
         ),
       }),
@@ -33,12 +33,12 @@ export const appRouter = router({
         cursor: entries.cursor,
         records: entries.records
           .filter((entry) => entry.value.visibility === "public")
-          .map((entry) => {
-            const uri = new AtUri(entry.uri);
+          .map(({ uri, value: { title, createdAt } }) => {
+            const { rkey } = new AtUri(uri);
             return {
-              title: entry.value.title,
-              createdAt: new Date(entry.value.createdAt),
-              rkey: uri.rkey,
+              title: title,
+              createdAt: createdAt ? new Date(createdAt) : undefined,
+              rkey: rkey,
             };
           }),
       };

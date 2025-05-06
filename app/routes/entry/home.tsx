@@ -5,13 +5,25 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import { rehypeFixFootnote, whitewindSchema } from "~/lib/parser";
+import { makeMeta } from "~/lib/commonmeta";
+
+export const links: Route.LinksFunction = () => [
+  { rel: "icon", href: "/favicon.png" },
+];
+
+export function meta({ data: { title }, location }: Route.MetaArgs) {
+  return makeMeta(location, title || "Untitled Blog Post");
+}
 
 export async function loader({ params }: Route.LoaderArgs) {
   try {
     const {
       value: { title, content },
     } = await getEntry(params.rkey);
-    return `${title ? `# ${title}\n\n---\n` : ""}${content}`;
+    return {
+      title,
+      content,
+    };
   } catch (e) {
     console.error(e);
     throw new Response(null, {
@@ -21,7 +33,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   }
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Home({
+  loaderData: { title, content },
+}: Route.ComponentProps) {
   return (
     <article className="prose prose-img:rounded-md prose-code:rounded-md dark:prose-invert sm:prose-sm md:prose-md lg:prose-lg xl:prose-xl 2xl:prose-2xl 4xl:prose-4xl mx-auto **:target:rounded-md **:target:border-2 **:target:border-blue-300">
       <Markdown
@@ -32,7 +46,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           rehypeFixFootnote,
         ]}
       >
-        {loaderData}
+        {`${title ? `# ${title}\n\n---\n` : ""}${content}`}
       </Markdown>
     </article>
   );

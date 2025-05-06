@@ -2,10 +2,10 @@ import { z, type ZodType } from "zod";
 
 const Entry = z.object({
   // ignore blobs & $type as they're extraneous
-  theme: z.string(),
-  title: z.string(),
+  theme: z.string().optional(),
+  title: z.string().optional(),
   content: z.string(),
-  createdAt: z.string().datetime(),
+  createdAt: z.string().datetime().optional(),
   visibility: z.enum(["public", "author", "url"]),
 });
 function getRecord<T extends ZodType>(type: T) {

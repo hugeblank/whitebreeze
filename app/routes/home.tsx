@@ -6,16 +6,15 @@ import Throbber from "~/components/Throbber";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
+import { makeMeta } from "~/lib/commonmeta";
+import { env } from "~/lib/env";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.png" },
 ];
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "WhiteBreeze" },
-    { name: "description", content: "Self-Hosted WhiteWind Blogspot" },
-  ];
+export function meta({ location }: Route.MetaArgs) {
+  return makeMeta(location, env.TITLE);
 }
 
 export const unstable_middleware: Route.unstable_MiddlewareFunction[] = [
@@ -61,23 +60,28 @@ export default function Home() {
   } else if (listPosts.isSuccess) {
     return (
       <div className="auto-cols grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4">
-        {listPosts.data.pages.flatMap((page) =>
-          page.records.map((record) => {
+        {listPosts.data.pages.flatMap(({ records }) =>
+          records.map(({ rkey, title, createdAt }) => {
+            const ttitle = title || "Untitled Blog Post";
             return (
-              <Card key={record.rkey} className="h-48 justify-between px-6">
+              <Card key={rkey} className="h-48 justify-between px-6">
                 <CardHeader>
                   <CardTitle>
                     <Link
                       className="line-clamp-3 text-lg text-blue-500 hover:text-blue-300 hover:underline"
-                      to={`/${record.rkey}`}
-                      title={record.title}
+                      to={`/${rkey}`}
+                      title={ttitle}
                     >
-                      {record.title}
+                      {ttitle}
                     </Link>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>{new Date(record.createdAt).toLocaleString()}</p>
+                  <p>
+                    {createdAt
+                      ? new Date(createdAt).toLocaleString()
+                      : "Unknown"}
+                  </p>
                 </CardContent>
               </Card>
             );
