@@ -19,4 +19,11 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths(),
   ],
+  environments: {
+    ssr: {
+      build: {
+        target: "es2022",
+      },
+    },
+  },
 });
