@@ -1,4 +1,4 @@
-FROM node:23-alpine AS pnpm
+FROM node:24-alpine AS pnpm
 COPY ./package.json pnpm-lock.yaml /app/
 WORKDIR /app
 RUN corepack enable
